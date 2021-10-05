@@ -76,7 +76,6 @@
     const storypointHeaderData = getStorypointHeaderData()
     if (storypointHeaderData === undefined) return
 
-
     const { index: storypointHeaderIndex } = storypointHeaderData
     const tableGroups = getTableGroups()
     tableGroups.forEach(tableGroup => {
@@ -85,7 +84,8 @@
   }
 
   const main = () => {
-    setInterval(() => { render() }, 2000)
+    setInterval(() => { render() }, 1000)
+    render()
   }
 
   main()
