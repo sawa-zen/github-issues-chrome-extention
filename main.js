@@ -56,7 +56,7 @@
     chip.style.height = '20px'
     chip.style.padding = '0px 8px'
     chip.style.marginLeft = '16px'
-    chip.innerText = `Storypoints: ${sum}`
+    chip.innerText = `Story Point: ${sum}`
     return chip
   }
 
@@ -65,6 +65,9 @@
     const rows = getRows(tableGroup)
     const sum = calcStorypointSum(rows, storypointHeaderIndex)
     const chip = createChip({ sum })
+
+    if (!header) return
+
     const oldChip = header.querySelector(`[data-test-id="${chipTestId}"]`)
     if (oldChip) {
       header.removeChild(oldChip)
