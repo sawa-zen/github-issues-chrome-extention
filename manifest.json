@@ -1,18 +1,19 @@
 {
-	"name": "GitHub issues storypoint",
-	"version": "1",
-	"content_scripts": [
-		{
-			"matches": [
-				"https://github.com/orgs/*/projects/*/views/*"
-			],
-			"js": [
-				"main.js"
-			]
-		}
-	],
+  "name": "GitHub issues storypoint",
+  "version": "1",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/orgs/*/projects/*",
+        "https://github.com/orgs/*/projects/*/views/*"
+      ],
+      "js": [
+        "main.js"
+      ]
+    }
+  ],
   "icons": {
     "128": "icon_128.png"
   },
-	"manifest_version": 2
+  "manifest_version": 2
 }
