@@ -1,15 +1,16 @@
 
 (() => {
-	const getStorypointHeaderData = () => {
-		const headers = document.querySelectorAll('[data-is-header="true"]')
-		for (const [index, header] of headers.entries()) {
-			if (header.textContent.includes('Story Point')) {
+	const getTargetHeaderData = (tableRoot) => {
+		const header = tableRoot.querySelector("[class^=table-header]")
+    const headerRow = header.childNodes[0]
+		for (const [index, cell] of headerRow.childNodes.entries()) {
+			if (cell.textContent.includes('Story Point')) {
 				return {
-					element: header,
+					element: cell,
 					index: index
 				}
 			}
-		}
+    }
 	}
 
 	const getTableGroups = () => {
@@ -36,7 +37,8 @@
   const calcStorypointSum = (rows, storypointHeaderIndex) => {
     let result = 0
     rows.forEach(row => {
-      result = result + Number(row.childNodes[storypointHeaderIndex + 1].textContent)
+      currentValue = Number(row.childNodes[storypointHeaderIndex].textContent)
+      result = result + currentValue
     })
     return result
   }
@@ -76,10 +78,11 @@
 	}
 
   const render = () => {
-    const storypointHeaderData = getStorypointHeaderData()
-    if (storypointHeaderData === undefined) return
+    const tableRoot = document.querySelector('[data-test-id="table-root"]')
+    const targetHeaderData = getTargetHeaderData(tableRoot)
+    if (targetHeaderData === undefined) return
 
-    const { index: storypointHeaderIndex } = storypointHeaderData
+    const { index: storypointHeaderIndex } = targetHeaderData
     const tableGroups = getTableGroups()
     tableGroups.forEach(tableGroup => {
       renderStorypointsSum(tableGroup, storypointHeaderIndex)

@@ -18,3 +18,9 @@ An extension for summing numbers on the GitHub issues screen
 1. Grouping by milestone or status
 1. Then the header will show the total value for that group.
     ![](./images/sum_badge.png)
+
+## How to develop
+
+開発中の拡張アプリは以下の手順でインストールして試すことができます
+1. chrome://extensions/ のページへ遷移
+1. このリポジトリのディレクトリ毎開いたページへドラッグ・アンド・ドロップ
