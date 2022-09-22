@@ -80,7 +80,11 @@
   const render = () => {
     const tableRoot = document.querySelector('[data-test-id="table-root"]')
     const targetHeaderData = getTargetHeaderData(tableRoot)
-    if (targetHeaderData === undefined) return
+    if (targetHeaderData === undefined) {
+      const oldChips = document.querySelectorAll(`[data-test-id="${chipTestId}"]`)
+      oldChips.forEach(oldChip => oldChip.remove())
+      return
+    }
 
     const { index: storypointHeaderIndex } = targetHeaderData
     const tableGroups = getTableGroups()
