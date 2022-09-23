@@ -1,22 +1,24 @@
 import { useState } from 'react'
+import { Button, VStack, TextInput } from '@topotal/topotal-ui'
 
-export const App = () => {
+export const App = (): JSX.Element => {
   const [count, setCount] = useState(0)
 
   return (
-    <div className="App">
-      <h1>Vite + React aaaaaaaaaaa</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
+    <VStack
+      style={{
+        padding: 24,
+        minWidth: 300,
+        borderRadius: 8,
+      }}
+      gap={16}
+    >
+      <TextInput size='medium' />
+      <Button
+        title="Save"
+        color="success"
+        size='medium'
+      />
+    </VStack>
   )
 }

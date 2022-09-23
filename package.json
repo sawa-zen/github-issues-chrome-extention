@@ -9,8 +9,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@topotal/topotal-ui": "^0.48.4",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-native-web": "^0.18.9",
+    "react-native-web-picker": "^0.1.0"
   },
   "devDependencies": {
     "@crxjs/vite-plugin": "^1.0.14",

@@ -26,5 +26,14 @@ const manifest = defineManifest({
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), crx({ manifest })]
+  plugins: [react(), crx({ manifest })],
+  // define: {
+  //   global: 'window',
+  // },
+  resolve: {
+    alias: {
+      'react-native': 'react-native-web',
+      '@react-native-picker/picker': 'react-native-web-picker'
+    },
+  },
 })
