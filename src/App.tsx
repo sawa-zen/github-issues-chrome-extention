@@ -1,24 +1,41 @@
-import { useState } from 'react'
-import { Button, VStack, TextInput } from '@topotal/topotal-ui'
+import { Button, VStack, TextInput, HStack, Text, useTheme, TagInput } from '@topotal/topotal-ui'
 
 export const App = (): JSX.Element => {
-  const [count, setCount] = useState(0)
+  const { color } = useTheme()
 
   return (
     <VStack
       style={{
-        padding: 24,
-        minWidth: 300,
+        minWidth: 360,
         borderRadius: 8,
       }}
-      gap={16}
     >
-      <TextInput size='medium' />
-      <Button
-        title="Save"
-        color="success"
-        size='medium'
-      />
+      <HStack
+        style={{
+          paddingVertical: 8,
+          paddingHorizontal: 16,
+          backgroundColor: color.primary,
+        }}
+      >
+        <Text
+          type="display1"
+          weight="bold"
+          style={{ color: color.primaryTextLight }}
+        >
+          GitHub Project Summing Calculator
+        </Text>
+      </HStack>
+      <VStack
+        style={{ padding: 16 }}
+        gap={16}
+      >
+        <TagInput />
+        <Button
+          title="Save"
+          color="success"
+          size='medium'
+        />
+      </VStack>
     </VStack>
   )
 }
