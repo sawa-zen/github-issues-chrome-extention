@@ -12,6 +12,7 @@ const manifest = defineManifest({
   action: {
     default_popup: 'index.html',
   },
+  permissions: ['storage'],
   content_scripts: [
     {
       matches: [

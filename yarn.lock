@@ -350,10 +350,10 @@
     estree-walker "^2.0.1"
     picomatch "^2.2.2"
 
-"@topotal/topotal-ui@^0.48.5":
-  version "0.48.5"
-  resolved "https://registry.yarnpkg.com/@topotal/topotal-ui/-/topotal-ui-0.48.5.tgz#06c37fb56f6995a41a9c3ee31bd8f6c446ed26d5"
-  integrity sha512-Xa5lS5YUDEsb+5zRhFGwN9oB+R4i1emXIHNph0vNOXFObBi6rTm658bQ3xnbN048sBg6wEVxj/5mQSlo14nzfw==
+"@topotal/topotal-ui@^0.49.2":
+  version "0.49.2"
+  resolved "https://registry.yarnpkg.com/@topotal/topotal-ui/-/topotal-ui-0.49.2.tgz#e360923b22b5344aa9d55fad5714b6b6499ef408"
+  integrity sha512-yFNqsZbV57kWCPUD4lecpgMxJwapb2mLsCaGphFlmgDLZZqA+/IRZDUMywLh/jDH93KnOWy06nCycH7BAwrdMA==
   dependencies:
     marked "^4.0.6"
     react-is "^17.0.1"
