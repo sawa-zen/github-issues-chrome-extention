@@ -1,18 +1,26 @@
 import { TagData } from "@topotal/topotal-ui"
 import { chipTestId, renderChip } from "./chip"
 
-const getTargetHeaderData = (tableRoot: Element) => {
+export interface HeaderData {
+  title: string
+  index: number
+}
+
+const getTargetHeaderData = (tableRoot: Element, targetColumnNames: TagData[]) => {
   const header = tableRoot.querySelector("[class^=table-header]")
   const headerRow = header!.childNodes[0]
-  for (const [index, cell] of headerRow.childNodes.entries()) {
-    const textContent = cell.textContent || ''
-    if (textContent.includes('Story Point')) {
-      return {
-        element: cell,
-        index: index
+
+  const targetHeaderData: HeaderData[] = []
+  targetColumnNames.forEach(({ value }) => {
+    for (const [index, cell] of headerRow.childNodes.entries()) {
+      const textContent = cell.textContent || ''
+      if (textContent.includes(value)) {
+        targetHeaderData.push({ title: value, index })
       }
     }
-  }
+  })
+
+  return targetHeaderData
 }
 
 const getTableGroups = () => {
@@ -32,23 +40,40 @@ const getTableGroups = () => {
   return result
 }
 
-const render = async () => {
+const getTargetColumnNames = async () => {
   const columnNamesJSON = await chrome.storage.local.get('columnNames')
   const columnNames = JSON.parse(columnNamesJSON.columnNames || '[]') as TagData[]
+  return columnNames
+}
 
-  const tableRoot = document.querySelector('[data-test-id="table-root"]')
+const clearChips = () => {
+  const oldChips = document.querySelectorAll(`[data-test-id^="${chipTestId}"]`)
+  oldChips.forEach(oldChip => oldChip.remove())
+}
 
-  const targetHeaderData = getTargetHeaderData(tableRoot!)
-  if (targetHeaderData === undefined) {
-    const oldChips = document.querySelectorAll(`[data-test-id="${chipTestId}"]`)
-    oldChips.forEach(oldChip => oldChip.remove())
+const render = async () => {
+  const tableRoot = document.querySelector('[data-test-id^="table-root"]')
+  const isBoardView = !tableRoot
+
+  if (isBoardView) return
+
+  const targetColumnNames = await getTargetColumnNames()
+  if (targetColumnNames.length === 0) {
+    clearChips()
     return
   }
 
-  const { index: storypointHeaderIndex } = targetHeaderData
-  const tableGroups = getTableGroups()
-  tableGroups.forEach(tableGroup => {
-    renderChip(tableGroup, storypointHeaderIndex)
+  const targetHeaderData = getTargetHeaderData(tableRoot, targetColumnNames)
+  if (targetHeaderData.length === 0) {
+    clearChips()
+    return
+  }
+
+  targetHeaderData.forEach((headerData) => {
+    const tableGroups = getTableGroups()
+    tableGroups.forEach(tableGroup => {
+      renderChip(tableGroup, headerData)
+    })
   })
 }
 
